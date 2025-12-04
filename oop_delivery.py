@@ -17,9 +17,24 @@ class Customer(Person):
     def __init__(self, name, address):
         super().__init__(name)
         self.__address = address
+        self.__orders = []
     
     def place_order(self, item):
-        return DeliveryOrder(self, item)
+        order = DeliveryOrder(self, item)
+        self.__orders.append(order)
+        return order
+    
+    def remove_order(self, order):
+        try:
+            self.__orders.remove(order)
+            return True
+        except ValueError:
+            print("Order not found.")
+            return False
+
+    @property
+    def orders(self):
+        return self.__orders    
     
     @property
     def address(self):
@@ -51,6 +66,7 @@ class DeliveryOrder:
 
     def assign_driver(self, driver):
         self.__driver = driver
+        driver.add_order(self)
     
     def summary(self):
         print("Order Summary:")
@@ -63,14 +79,37 @@ class Driver(Person):
     def __init__(self, name, vehicle):
         super().__init__(name)
         self.__vehicle = vehicle
+        self.__orders = []
+    
+    
+    def deliver(self, order: DeliveryOrder):
+        if order.driver != self:
+            print("The order is assigned to another driver.")
+            return
+        if not order.customer.remove_order(order) or not self.remove_order(order):
+            return
+
+        print(f"{self.name} is delivering {order.item} to {order.customer} using {self.vehicle}.")
+        order.status = "delivered"
     
     @property
     def vehicle(self):
         return self.__vehicle
     
-    def deliver(self, order: DeliveryOrder):
-        print(f"{self.name} is delivering {order.item} to {order.customer} using {self.vehicle}.")
-        order.status = "delivered"
+    @property
+    def orders(self):
+        return self.__orders
+    
+    def add_order(self, order):
+        self.__orders.append(order)
+
+    def remove_order(self, order):
+        try:
+            self.__orders.remove(order)
+            return True
+        except ValueError:
+            print("Order not found.")
+            return False
 
 if __name__ == "__main__":
     alice = Customer("Alice", "A")
