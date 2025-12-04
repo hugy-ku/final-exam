@@ -42,7 +42,7 @@ class Customer(Person):
 
 class DeliveryOrder:
     def __init__(self, customer: Customer, item):
-        self.customer = customer
+        self.__customer = customer
         self.__item = item
         self.__status = "preparing"
         self.__driver = "None"
@@ -50,6 +50,9 @@ class DeliveryOrder:
     @property
     def item(self):
         return self.__item
+    @property
+    def customer(self):
+        return self.__customer
     @property
     def status(self):
         return self.__status
@@ -67,6 +70,7 @@ class DeliveryOrder:
     def summary(self):
         print("Order Summary:")
         print(f"Item: {self.__item}")
+        print(f"Customer: {self.__customer}")
         print(f"Status: {self.__status}")
         print(f"Driver: {self.__driver}")
 
