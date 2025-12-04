@@ -26,11 +26,10 @@ class DeliveryOrder:
         self.driver = driver
     
     def summary(self):
-        result = []
-        result.append("Order Summary:")
-        result.append(f"Item: {self.item}")
-        result.append(f"Status: {self.status}")
-        result.append(f"Driver: {self.driver}")
+        print("Order Summary:")
+        print(f"Item: {self.item}")
+        print(f"Status: {self.status}")
+        print(f"Driver: {self.driver}")
 
 
 class Driver(Person):
@@ -41,3 +40,21 @@ class Driver(Person):
     def deliver(self, order: DeliveryOrder):
         print(f"{self.name} is delivering {order.item} to {order.customer.name} using {self.vehicle}.")
         order.status = "delivered"
+
+if __name__ == "__main__":
+    alice = Customer("Alice", "A")
+    bob = Customer("Bob", "B")
+    david = Driver("David", "motorcycle")
+
+    alice.introduce()
+    bob.introduce()
+    david.introduce()
+    print()
+
+    order1 = alice.place_order("Laptop")
+    order2 = bob.place_order("Headphones")
+
+    order1.summary()
+    print()
+    order2.summary()
+    print()
