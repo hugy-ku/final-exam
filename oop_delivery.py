@@ -3,7 +3,7 @@ class Person:
         self.name = name
     
     def introduce(self):
-        print(f"Hi, I'm {self.name}")
+        print(f"Hi, I'm {self.name}.")
 
 
 class Customer(Person):
@@ -29,7 +29,7 @@ class DeliveryOrder:
         print("Order Summary:")
         print(f"Item: {self.item}")
         print(f"Status: {self.status}")
-        print(f"Driver: {self.driver}")
+        print(f"Driver: {self.driver.name}")
 
 
 class Driver(Person):
@@ -53,6 +53,9 @@ if __name__ == "__main__":
 
     order1 = alice.place_order("Laptop")
     order2 = bob.place_order("Headphones")
+
+    order1.assign_driver(david)
+    order2.assign_driver(david)
 
     order1.summary()
     print()
