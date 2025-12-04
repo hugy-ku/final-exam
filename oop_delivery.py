@@ -6,7 +6,10 @@ class Person:
         print(f"Hi, I'm {self.name}")
 
 class DeliveryOrder:
-    pass
+    def __init__(self, customer, item):
+        self.customer = customer
+        self.item = item
+        self.status = "preparing"
 
 class Customer(Person):
     def __init__(self, name, address):
