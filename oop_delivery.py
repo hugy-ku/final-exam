@@ -61,3 +61,11 @@ if __name__ == "__main__":
     print()
     order2.summary()
     print()
+
+    david.deliver(order1)
+    david.deliver(order2)
+    print()
+
+    print("Final Status:")
+    print(f"Order for {order1.item} → {order1.status}")
+    print(f"Order for {order2.item} → {order2.status}")
