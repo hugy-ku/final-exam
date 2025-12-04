@@ -11,15 +11,26 @@ class Customer(Person):
         super().__init__(name)
         self.address = address
     
+    def place_order(self, item):
+        return DeliveryOrder(self, item)
+
 
 class DeliveryOrder:
     def __init__(self, customer: Customer, item):
         self.customer = customer
         self.item = item
         self.status = "preparing"
+        self.driver = "None"
 
-    def place_order(self, item):
-        return DeliveryOrder(self, item)
+    def assign_driver(self, driver):
+        self.driver = driver
+    
+    def summary(self):
+        result = []
+        result.append("Order Summary:")
+        result.append(f"Item: {self.item}")
+        result.append(f"Status: {self.status}")
+        result.append(f"Driver: {self.driver}")
 
 
 class Driver(Person):
