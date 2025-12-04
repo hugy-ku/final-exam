@@ -5,6 +5,9 @@ class Person:
     def introduce(self):
         print(f"Hi, I'm {self.name}")
 
+class DeliveryOrder:
+    pass
+
 class Customer(Person):
     def __init__(self, name, address):
         super().__init__(name)
@@ -14,5 +17,10 @@ class Customer(Person):
         # return DeliveryOrder
         pass
 
-class DeliveryOrder:
-    pass
+class Driver(Person):
+    def __init__(self, name, vehicle):
+        super().__init__(name)
+        self.vehicle = vehicle
+    
+    def deliver(self, order: DeliveryOrder):
+        pass
